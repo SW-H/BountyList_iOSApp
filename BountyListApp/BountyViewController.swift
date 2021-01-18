@@ -46,7 +46,11 @@ class BountyViewController: UIViewController, UITableViewDataSource, UITableView
     
     //UITableViewDelegate : 클릭했을때 어떻게 응답할지
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("--> \(indexPath.row)") //indexPath : 클릭된 셀이 몇번째인지 정보를 가짐
+        // print("--> \(indexPath.row)") //indexPath : 클릭된 셀이 몇번째인지 정보를 가짐
+        
+        //segue way를 수행해라
+        performSegue(withIdentifier: "ShowDetail", sender: nil)
+        // sender : segue way 수행시 특정 object를 끼워서 보낼 수도 있는데 이때 보낼 object
     }
 
 }
