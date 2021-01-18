@@ -17,8 +17,22 @@ class ListCell: UITableViewCell {
 class BountyViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let nameList =  ["brook", "chopper", "franky","luffy","nami","robin","sanji","zoro"]
-    let bountyList = [152430000,8000000,3240000,1142300000,55000000,613600000,70000000000,888888888888]
+    let bountyList = [152430000,8000000,3240000,1142300000,55000000,613600000,70000000,888888888888]
 
+    
+    //segue way를 수행하기 직전에 수행하기 위해 준비하는 메소드
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // DetailViewController에게 데이터를 전달해 줌
+        if segue.identifier == "ShowDetail"{
+            let vc = segue.destination as? DetailViewController
+            if let index = sender as? Int {//Down casting
+                vc?.name = nameList[index]
+                vc?.bounty = bountyList[index]
+            }
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,9 +62,10 @@ class BountyViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // print("--> \(indexPath.row)") //indexPath : 클릭된 셀이 몇번째인지 정보를 가짐
         
-        //segue way를 수행해라
-        performSegue(withIdentifier: "ShowDetail", sender: nil)
+        //view cell이 클릭 되었을때 segue way를 수행해라
+        performSegue(withIdentifier: "ShowDetail", sender: indexPath.row)
         // sender : segue way 수행시 특정 object를 끼워서 보낼 수도 있는데 이때 보낼 object
+        // cell 에 대한 정보를 넘김
     }
 
 }
