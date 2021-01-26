@@ -25,23 +25,23 @@ class BountyViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     
-    let bountyInfoList: [BountyInfo] = [
-        BountyInfo(name: "brook", bounty: 152430000),
-        BountyInfo(name: "chopper", bounty: 8000000),
-        BountyInfo(name: "franky", bounty: 3240000),
-        BountyInfo(name: "luffy", bounty: 1142300000),
-        BountyInfo(name: "nami", bounty: 55000000),
-        BountyInfo(name: "robin", bounty: 613600000),
-        BountyInfo(name: "sanji", bounty: 70000000),
-        BountyInfo(name: "zoro", bounty: 888888888888)
-    
-    ]
+//    let bountyInfoList: [BountyInfo] = [
+//        BountyInfo(name: "brook", bounty: 152430000),
+//        BountyInfo(name: "chopper", bounty: 8000000),
+//        BountyInfo(name: "franky", bounty: 3240000),
+//        BountyInfo(name: "luffy", bounty: 1142300000),
+//        BountyInfo(name: "nami", bounty: 55000000),
+//        BountyInfo(name: "robin", bounty: 613600000),
+//        BountyInfo(name: "sanji", bounty: 70000000),
+//        BountyInfo(name: "zoro", bounty: 888888888888)
+//
+//    ]
     
     
 //    let nameList =  ["brook", "chopper", "franky","luffy","nami","robin","sanji","zoro"]
 //    let bountyList = [152430000,8000000,3240000,1142300000,55000000,613600000,70000000,888888888888]
     
-    
+    let viewModel = BountyViewModel()
     
     //segue way를 수행하기 직전에 수행하기 위해 준비하는 메소드
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -49,7 +49,8 @@ class BountyViewController: UIViewController, UITableViewDataSource, UITableView
         if segue.identifier == "ShowDetail"{
             let vc = segue.destination as? DetailViewController
             if let index = sender as? Int {//Down casting
-                let bountyInfo = bountyInfoList[index]
+//                let bountyInfo = bountyInfoList[index]
+                let bountyInfo = viewModel.bountyInfo(at: index)
                 
 //                vc?.name = nameList[index]
 //                vc?.bounty = bountyList[index]
@@ -58,7 +59,9 @@ class BountyViewController: UIViewController, UITableViewDataSource, UITableView
 
 //                vc?.name = bountyInfo.name
 //                vc?.bounty = bountyInfo.bounty
-                vc?.bountyInfo  = bountyInfo
+
+//                vc?.bountyInfo  = bountyInfo
+                vc?.viewModel.update(model: bountyInfo)
             }
         }
     }
@@ -73,7 +76,8 @@ class BountyViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //몇개니
 //        return bountyList.count
-        return bountyInfoList.count
+//        return bountyInfoList.count
+        return viewModel.numOfBountyInfoList
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -88,8 +92,8 @@ class BountyViewController: UIViewController, UITableViewDataSource, UITableView
 //        cell.nameLabel.text = nameList[indexPath.row]
 //        cell.bountyLabel.text = "\(bountyList[indexPath.row])"
         
-        let bountyInfo = bountyInfoList[indexPath.row]
-               
+//        let bountyInfo = bountyInfoList[indexPath.row]
+        let bountyInfo = viewModel.bountyInfo(at:indexPath.row)
         cell.imgView.image = bountyInfo.image
         cell.nameLabel.text = bountyInfo.name
         cell.bountyLabel.text = "\(bountyInfo.bounty)"
@@ -127,5 +131,26 @@ struct BountyInfo{
     init(name:String, bounty:Int){
         self.name = name
         self.bounty = bounty
+    }
+}
+
+class BountyViewModel{
+    let bountyInfoList: [BountyInfo] = [
+        BountyInfo(name: "brook", bounty: 152430000),
+        BountyInfo(name: "chopper", bounty: 8000000),
+        BountyInfo(name: "franky", bounty: 3240000),
+        BountyInfo(name: "luffy", bounty: 1142300000),
+        BountyInfo(name: "nami", bounty: 55000000),
+        BountyInfo(name: "robin", bounty: 613600000),
+        BountyInfo(name: "sanji", bounty: 70000000),
+        BountyInfo(name: "zoro", bounty: 888888888888)
+    
+    ]
+    
+    var numOfBountyInfoList: Int{
+        return bountyInfoList.count
+    }
+    func bountyInfo(at index : Int)->BountyInfo{
+        return bountyInfoList[index]
     }
 }
