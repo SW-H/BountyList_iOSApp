@@ -149,8 +149,10 @@
                     <size key="freeformSize" width="414" height="896"/>
                     <connections>
                         <outlet property="bountyLabel" destination="1WZ-xa-cL8" id="ntU-uu-4Dx"/>
+                        <outlet property="bountyLabelCenterX" destination="30e-xH-Qn8" id="5L4-0k-xRG"/>
                         <outlet property="imgView" destination="R5u-az-fGV" id="IGo-uJ-2pH"/>
                         <outlet property="nameLabel" destination="HQu-et-wGB" id="mZK-RF-0ta"/>
+                        <outlet property="nameLabelCenterX" destination="zfZ-HZ-Qpi" id="Ep3-sK-yHb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9K6-uP-Bzi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
