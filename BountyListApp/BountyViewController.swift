@@ -1,13 +1,4 @@
-//
-//  BountyViewController.swift
-//  BountyList
-//
-//  Created by 한승원 on 2021/01/13.
-//
-
 import UIKit
-
-
 
 class BountyViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
@@ -24,7 +15,6 @@ class BountyViewController: UIViewController, UICollectionViewDataSource, UIColl
             }
         }
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
